@@ -22,7 +22,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Core\\": "src"
+      "MolecularCore\\": "src/MolecularCore"
     }
   }
 }
