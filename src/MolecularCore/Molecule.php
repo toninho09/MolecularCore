@@ -7,10 +7,12 @@
 		
 	    public static function __callStatic($name, $arguments)
 	    {
-			if (!isset(self::$instance)) {
-	            self::$instance = new $this->class();
-	        }
-			call_user_func_array(array(self::getInstance(),$name),$arguments);
+			return call_user_func_array(array(self::getInstance(),$name),$arguments);
+		}
+		
+		public function __call($name, $arguments)
+	    {
+			return call_user_func_array(array(self::getInstance(),$name),$arguments);
 		}
 		
 		public function register(\MolecularCore\Core &$app){
