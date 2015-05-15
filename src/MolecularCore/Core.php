@@ -18,7 +18,7 @@
 			class_alias($molecule,$alias);
 			$atom = new $alias();
 			$atom->register($this);
-			$this->molecules[] = $atom;			
+			$this->molecules[$alias] = $atom;			
 		}
 		
 		public function run(){
