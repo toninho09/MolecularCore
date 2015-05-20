@@ -3,9 +3,11 @@
 	class Core {
 		private $molecules =[];
 		public $request;
+		public $respone;
 		
 		public function __construct(){
 			$this->request = new Request();
+			$this->response = new Response();
 		}
 		
 		public function addMolecule($molecule){
@@ -25,5 +27,6 @@
 			foreach($this->molecules as $molecule ){
 				$molecule->run();
 			}
+			echo $this->response->getResponseContent();
 		}
 	}

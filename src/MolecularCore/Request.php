@@ -31,5 +31,15 @@
 		public function getAccept(){
 			return $_SERVER['HTTP_ACCEPT'];
 		}
+		public function getHeaders($header){
+			if(!empty($header)){
+				return getallheaders();
+			}else{
+				if(!isset(getallheaders()[$header])){
+					return null;
+				}
+				return getallheaders()[$header];
+			}
+		}
 	}
 	
