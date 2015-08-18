@@ -4,7 +4,7 @@
 		private $molecules =[];
 		public $request;
 		public $respone;
-		
+
 		public function __construct(){
 			$this->request = new Request();
 			$this->response = new Response();
@@ -19,13 +19,24 @@
 		private function registerMolecule($alias,$molecule){
 			class_alias($molecule,$alias);
 			$atom = new $alias();
-			$atom->register($this);
-			$this->molecules[$alias] = $atom;			
+			$name = $atom->register($this);
+			if(empty($name)){
+				$this->molecules[$alias] = ['alias'=>$alias,'molecule'=>$atom];			
+			}else{
+				$this->molecules[$name] = ['alias'=>$alias,'molecule'=>$atom];			
+			}
+		}
+
+		public function getMolecule($name){
+			if (isset($molecule[$name])){
+				return $molecule[$name]['molecule'];
+			}
+			throw new Exception("Molecule Not Found", 1);
 		}
 		
 		public function run(){
 			foreach($this->molecules as $molecule ){
-				$molecule->run();
+				$molecule['molecule']->run();
 			}
 			echo $this->response->getResponseContent();
 		}
