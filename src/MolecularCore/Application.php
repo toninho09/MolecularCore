@@ -10,6 +10,14 @@
 			$this->core->addMolecule($molecule);
 		}
 		
+		public function setConfig($conf,$value = null){
+			$this->core->setConfig($conf,$value);
+		}
+		
+		public function getConfig($conf){
+			return $this->core->getConfig($conf);
+		}
+		
 		public function run(){
 			$this->core->run();
 		}

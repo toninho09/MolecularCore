@@ -4,6 +4,7 @@
 		private $molecules =[];
 		public $request;
 		public $respone;
+		private $config = [];
 
 		public function __construct(){
 			$this->request = new Request();
@@ -39,5 +40,23 @@
 				$molecule['molecule']->run();
 			}
 			echo $this->response->getResponseContent();
+		}
+		
+		public function getConfig($conf){
+			return isset($this->config[$conf]) ? $this->config[$conf] : null;
+		}
+		
+		public function setConfig($conf,$value = null){
+			if(is_array($conf)){
+				foreach($conf as $key => $val){
+					$this->setOneConfig($key,$val);
+				}
+			}else{
+				$this->setOneConfig($conf,$value);
+			}
+		}
+		
+		private function setOneConfig($conf,$value){
+			$this->config[$conf] = $value;
 		}
 	}
